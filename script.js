@@ -108,8 +108,13 @@ function nextLoadingStep() {
   const el = $("#loading-text");
   el.classList.add("fade");
   setTimeout(() => {
-    el.textContent = TEXTS[lang].loading[loadingStep];
-    el.classList.remove("fade");
+    // Nodo nuevo en vez de cambiar el texto: Safari (iPhone) dejaba restos
+    // del mensaje anterior al repintar durante el fundido
+    const fresh = document.createElement("p");
+    fresh.id = "loading-text";
+    fresh.className = "loading-text enter";
+    fresh.textContent = TEXTS[lang].loading[loadingStep];
+    el.replaceWith(fresh);
     setTimeout(nextLoadingStep, STEP_MS);
   }, 300);
 }
