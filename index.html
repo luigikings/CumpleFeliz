@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#1a0f2e" />
+  <title>🎂 Mimi</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Nunito:wght@400;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- Selector de idioma -->
+  <nav class="lang" aria-label="Language">
+    <button data-lang="hu">HU</button>
+    <button data-lang="es">ES</button>
+    <button data-lang="en">EN</button>
+  </nav>
+
+  <canvas id="confetti"></canvas>
+
+  <!-- 1. Pantalla de carga -->
+  <section id="screen-loading" class="screen active">
+    <div class="loader">
+      <div class="dot"></div><div class="dot"></div><div class="dot"></div>
+    </div>
+    <p id="loading-text" class="loading-text"></p>
+    <div class="bar"><div id="bar-fill" class="bar-fill"></div></div>
+  </section>
+
+  <!-- 2. Botón misterioso -->
+  <section id="screen-button" class="screen">
+    <button id="big-button" class="big-button" data-i18n="button"></button>
+    <p class="subtle" data-i18n="buttonHint"></p>
+  </section>
+
+  <!-- 3. La vela -->
+  <section id="screen-candle" class="screen">
+    <h1 class="title" data-i18n="blowTitle"></h1>
+
+    <div class="candle-wrap">
+      <div id="flame-holder" class="flame-holder">
+        <div class="glow"></div>
+        <div id="flame" class="flame">
+          <div class="flame-inner"></div>
+        </div>
+      </div>
+      <div class="smoke" id="smoke">
+        <span></span><span></span><span></span><span></span>
+      </div>
+      <div class="wick"></div>
+      <div class="candle">
+        <div class="drip d1"></div>
+        <div class="drip d2"></div>
+      </div>
+      <div class="plate"></div>
+    </div>
+
+    <p id="mic-hint" class="subtle small" data-i18n="blowHint"></p>
+    <div class="meter"><div id="meter-fill" class="meter-fill"></div></div>
+  </section>
+
+  <!-- 4. Feliz cumpleaños -->
+  <section id="screen-final" class="screen">
+    <div class="final-card">
+      <div class="cake">🎂</div>
+      <h1 class="final-title" data-i18n="finalTitle"></h1>
+      <p class="final-msg" data-i18n="finalMsg"></p>
+      <p class="final-wish" data-i18n="finalWish"></p>
+      <button id="replay" class="replay" data-i18n="replay"></button>
+    </div>
+  </section>
+
+  <script src="script.js"></script>
+</body>
+</html>

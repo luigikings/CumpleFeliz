@@ -1,0 +1,353 @@
+:root {
+  --bg1: #1a0f2e;
+  --bg2: #3b1d5c;
+  --pink: #ff6fae;
+  --gold: #ffd36e;
+  --text: #fff6fb;
+  --muted: #cdb8e0;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+
+html, body { height: 100%; }
+
+body {
+  font-family: "Nunito", system-ui, sans-serif;
+  color: var(--text);
+  background: radial-gradient(ellipse at 50% 30%, var(--bg2) 0%, var(--bg1) 70%);
+  background-color: var(--bg1);
+  overflow: hidden;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* ---------- Idioma ---------- */
+.lang {
+  position: fixed;
+  top: calc(12px + env(safe-area-inset-top));
+  right: 12px;
+  z-index: 20;
+  display: flex;
+  gap: 4px;
+  background: rgba(255, 255, 255, 0.08);
+  padding: 4px;
+  border-radius: 999px;
+  backdrop-filter: blur(6px);
+}
+.lang button {
+  font: inherit;
+  font-size: 12px;
+  font-weight: 800;
+  color: var(--muted);
+  background: transparent;
+  border: 0;
+  padding: 6px 10px;
+  border-radius: 999px;
+  cursor: pointer;
+}
+.lang button.active { background: var(--pink); color: #fff; }
+
+/* ---------- Pantallas ---------- */
+.screen {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  padding: 24px 16px;
+  text-align: center;
+  opacity: 0;
+  pointer-events: none;
+  transform: scale(0.97);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.screen.active { opacity: 1; pointer-events: auto; transform: scale(1); }
+
+.subtle { color: var(--muted); font-size: 15px; }
+.small { font-size: 13px; }
+
+/* ---------- Carga ---------- */
+.loader { display: flex; gap: 10px; }
+.dot {
+  width: 14px; height: 14px; border-radius: 50%;
+  background: var(--pink);
+  animation: bounce 1s infinite ease-in-out;
+}
+.dot:nth-child(2) { animation-delay: 0.15s; background: var(--gold); }
+.dot:nth-child(3) { animation-delay: 0.3s; background: #8fd3ff; }
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); opacity: 0.6; }
+  50% { transform: translateY(-14px); opacity: 1; }
+}
+.loading-text {
+  font-size: 20px;
+  font-weight: 700;
+  min-height: 1.5em;
+  transition: opacity 0.3s;
+}
+.loading-text.fade { opacity: 0; }
+.bar {
+  width: min(260px, 80vw);
+  height: 6px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.12);
+  overflow: hidden;
+}
+.bar-fill {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, var(--pink), var(--gold));
+  transition: width 0.4s ease;
+}
+
+/* ---------- Botón misterioso ---------- */
+.big-button {
+  font: inherit;
+  font-size: 22px;
+  font-weight: 800;
+  color: #fff;
+  width: 190px;
+  height: 190px;
+  border-radius: 50%;
+  border: 0;
+  cursor: pointer;
+  background: radial-gradient(circle at 35% 30%, #ff8a8a, #e0182d 60%, #8e0010);
+  box-shadow: 0 12px 0 #5c000a, 0 20px 40px rgba(0, 0, 0, 0.5), inset 0 -6px 12px rgba(0,0,0,0.3);
+  animation: pulse 1.6s infinite;
+  padding: 16px;
+  line-height: 1.2;
+}
+.big-button:active { transform: translateY(8px); box-shadow: 0 4px 0 #5c000a, 0 10px 20px rgba(0,0,0,0.5); }
+@keyframes pulse {
+  0%, 100% { filter: brightness(1); }
+  50% { filter: brightness(1.2); }
+}
+
+/* ---------- Vela ---------- */
+.title {
+  font-family: "Pacifico", cursive;
+  font-weight: 400;
+  font-size: clamp(28px, 8vw, 40px);
+  color: var(--gold);
+  text-shadow: 0 0 20px rgba(255, 211, 110, 0.4);
+}
+
+.candle-wrap {
+  position: relative;
+  width: 160px;
+  height: 320px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.candle {
+  position: relative;
+  width: 56px;
+  height: 170px;
+  border-radius: 8px 8px 4px 4px;
+  background:
+    repeating-linear-gradient(135deg, transparent 0 14px, rgba(255,255,255,0.35) 14px 24px),
+    linear-gradient(90deg, #ff8fc2, #ff6fae 45%, #d94c8c);
+  box-shadow: inset -6px 0 10px rgba(0,0,0,0.15);
+}
+.drip {
+  position: absolute;
+  top: -2px;
+  width: 12px;
+  background: #ffa6d0;
+  border-radius: 0 0 8px 8px;
+}
+.d1 { left: 8px; height: 26px; }
+.d2 { right: 12px; height: 16px; }
+
+.plate {
+  width: 130px;
+  height: 18px;
+  margin-top: -4px;
+  border-radius: 50%;
+  background: linear-gradient(#e9e0f2, #a79bb8);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.4);
+}
+
+.wick {
+  width: 4px;
+  height: 16px;
+  background: #2b2b2b;
+  border-radius: 2px;
+}
+
+.flame-holder {
+  position: absolute;
+  bottom: 196px; /* plate + candle + wick */
+  left: 50%;
+  width: 0;
+  height: 0;
+  --lean: 0deg;
+  --size: 1;
+}
+
+.glow {
+  position: absolute;
+  left: -90px;
+  bottom: -60px;
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 200, 90, 0.45), rgba(255, 150, 50, 0) 70%);
+  animation: glow 2s infinite ease-in-out;
+  transition: opacity 0.4s;
+}
+@keyframes glow {
+  0%, 100% { transform: scale(1); opacity: 0.9; }
+  50% { transform: scale(1.12); opacity: 1; }
+}
+
+/* La llama se "inclina" con --lean (viento o soplido) y se encoge con --size */
+.flame {
+  position: absolute;
+  left: -16px;
+  bottom: -6px;
+  width: 32px;
+  height: 64px;
+  transform-origin: 50% 100%;
+  transform: rotate(var(--lean)) scale(var(--size));
+  transition: transform 0.12s linear, opacity 0.3s;
+}
+.flame::before,
+.flame-inner {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+  transform-origin: 50% 100%;
+}
+/* Capa externa: naranja */
+.flame::before {
+  background: radial-gradient(ellipse at 50% 80%, #fff3b0 0%, #ffb830 35%, #ff6a00 70%, rgba(255, 80, 0, 0) 100%);
+  filter: blur(1px);
+  animation: wind 1.8s infinite ease-in-out;
+}
+/* Núcleo: amarillo/blanco con algo de azul abajo */
+.flame-inner {
+  inset: 22px 8px 2px 8px;
+  background: radial-gradient(ellipse at 50% 90%, #9bd4ff 0%, #fffbe6 30%, #ffe27a 70%, rgba(255, 220, 120, 0) 100%);
+  animation: wind 1.8s infinite ease-in-out, flicker 0.15s infinite alternate;
+}
+/* Viento: la llama se dobla de lado a lado de forma irregular */
+@keyframes wind {
+  0%   { transform: skewX(0deg) scaleY(1); }
+  15%  { transform: skewX(-8deg) scaleY(1.05); }
+  30%  { transform: skewX(5deg) scaleY(0.95); }
+  45%  { transform: skewX(-12deg) scaleY(1.08); }
+  60%  { transform: skewX(3deg) scaleY(0.97); }
+  80%  { transform: skewX(-6deg) scaleY(1.03); }
+  100% { transform: skewX(0deg) scaleY(1); }
+}
+@keyframes flicker {
+  from { opacity: 0.9; }
+  to { opacity: 1; }
+}
+
+.flame-holder.out .flame { opacity: 0; transform: rotate(var(--lean)) scale(0.1); }
+.flame-holder.out .glow { opacity: 0; }
+
+/* Humo al apagarse */
+.smoke {
+  position: absolute;
+  bottom: 200px;
+  left: 50%;
+  width: 0;
+  height: 0;
+}
+.smoke span {
+  position: absolute;
+  left: -8px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: rgba(200, 200, 210, 0.5);
+  filter: blur(4px);
+  opacity: 0;
+}
+.smoke.on span { animation: smoke 2.4s ease-out forwards; }
+.smoke.on span:nth-child(2) { animation-delay: 0.25s; }
+.smoke.on span:nth-child(3) { animation-delay: 0.5s; }
+.smoke.on span:nth-child(4) { animation-delay: 0.75s; }
+@keyframes smoke {
+  0%   { opacity: 0.7; transform: translate(0, 0) scale(0.6); }
+  50%  { opacity: 0.4; transform: translate(10px, -70px) scale(1.6); }
+  100% { opacity: 0; transform: translate(-12px, -150px) scale(2.6); }
+}
+
+/* Barrita que se llena cuando sopla */
+.meter {
+  width: 140px;
+  height: 6px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.1);
+  overflow: hidden;
+  margin-top: -12px;
+}
+.meter-fill {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, #8fd3ff, #fff);
+  transition: width 0.1s linear;
+}
+
+/* ---------- Final ---------- */
+.final-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  max-width: 420px;
+}
+.cake { font-size: 72px; animation: bounce-cake 2s infinite ease-in-out; }
+@keyframes bounce-cake {
+  0%, 100% { transform: translateY(0) rotate(-3deg); }
+  50% { transform: translateY(-10px) rotate(3deg); }
+}
+.final-title {
+  font-family: "Pacifico", cursive;
+  font-weight: 400;
+  font-size: clamp(34px, 11vw, 54px);
+  line-height: 1.25;
+  background: linear-gradient(90deg, var(--pink), var(--gold), var(--pink));
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: shine 3s linear infinite;
+}
+@keyframes shine { to { background-position: 200% center; } }
+.final-msg { font-size: 18px; line-height: 1.5; }
+.final-wish { color: var(--gold); font-weight: 700; }
+.replay {
+  font: inherit;
+  font-weight: 700;
+  margin-top: 12px;
+  color: var(--muted);
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  padding: 10px 22px;
+  border-radius: 999px;
+  cursor: pointer;
+}
+
+#confetti {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 10;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .flame::before, .flame-inner, .glow, .dot, .cake, .big-button { animation: none; }
+}
