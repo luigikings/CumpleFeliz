@@ -22,3 +22,9 @@ Si el micro no está disponible o no se da permiso, se puede tocar la llama para
 python3 -m http.server 8000
 # abrir http://localhost:8000
 ```
+
+## Capturas
+
+| Carga | Botón | Vela | Final |
+|---|---|---|---|
+| ![](capturas/1b-carga.png) | ![](capturas/2-boton.png) | ![](capturas/3-vela.png) | ![](capturas/4-final.png) |
