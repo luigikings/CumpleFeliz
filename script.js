@@ -12,7 +12,7 @@ const TEXTS = {
     buttonHint: "Komolyan... ne nyomd meg. 👀",
     blowTitle: "Fújd el a gyertyát!",
     blowHint: "🎤 Fújj bele a telefonod mikrofonjába",
-    micFallback: "Nem érem el a mikrofont 😕 Koppints a lángra!",
+    micFallback: "👆 Koppints többször a gyertyára, hogy elfújd!",
     finalTitle: "Boldog születésnapot, Mimi!",
     finalMsg: "Remélem, csodás napod lesz, tele nevetéssel, szeretettel és sok-sok tortával! 🥳",
     finalWish: "Ugye kívántál valamit? ✨",
@@ -30,7 +30,7 @@ const TEXTS = {
     buttonHint: "En serio... no lo pulses. 👀",
     blowTitle: "¡Sopla la vela!",
     blowHint: "🎤 Sopla en el micrófono del móvil",
-    micFallback: "No puedo usar el micrófono 😕 ¡Toca la llama!",
+    micFallback: "👆 Toca varias veces la vela para apagarla",
     finalTitle: "¡Feliz cumpleaños, Mimi!",
     finalMsg: "Espero que lo pases increíble, con muchas risas, mucho cariño y mucha tarta. 🥳",
     finalWish: "¿Has pedido un deseo? ✨",
@@ -48,7 +48,7 @@ const TEXTS = {
     buttonHint: "Seriously... don't press it. 👀",
     blowTitle: "Blow out the candle!",
     blowHint: "🎤 Blow into your phone's microphone",
-    micFallback: "Can't reach the microphone 😕 Tap the flame!",
+    micFallback: "👆 Tap the candle several times to blow it out",
     finalTitle: "Happy birthday, Mimi!",
     finalMsg: "I hope you have an amazing day, full of laughs, love and lots of cake! 🥳",
     finalWish: "Did you make a wish? ✨",
@@ -196,11 +196,29 @@ function listenForBlow(stream) {
   requestAnimationFrame(tick);
 }
 
+// Sin permiso de micro (o sin micro): hay que tocar la vela varias veces
+const TAPS_NEEDED = 5;
 function enableTapFallback() {
   micFailed = true;
   $("#mic-hint").textContent = TEXTS[lang].micFallback;
-  flameHolder.style.cursor = "pointer";
-  $(".candle-wrap").addEventListener("click", blowOut, { once: true });
+  const wrap = $(".candle-wrap");
+  wrap.style.cursor = "pointer";
+  let taps = 0;
+  wrap.addEventListener("click", function onTap() {
+    if (blownOut) return;
+    taps++;
+    const ratio = taps / TAPS_NEEDED;
+    // Cada toque "empuja" la llama y la hace más pequeña
+    flameHolder.style.setProperty("--lean", `${20 + Math.random() * 15}deg`);
+    flameHolder.style.setProperty("--size", `${1 - ratio * 0.6}`);
+    setTimeout(() => flameHolder.style.setProperty("--lean", "0deg"), 180);
+    $("#meter-fill").style.width = `${ratio * 100}%`;
+    if (navigator.vibrate) navigator.vibrate(20);
+    if (taps >= TAPS_NEEDED) {
+      wrap.removeEventListener("click", onTap);
+      blowOut();
+    }
+  });
 }
 
 // ---------- 4. Se apaga la vela ----------

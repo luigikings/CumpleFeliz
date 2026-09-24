@@ -14,7 +14,7 @@ Es HTML/CSS/JS puro, sin dependencias.
 El micrófono solo funciona con **HTTPS**, así que lo más fácil es GitHub Pages:
 Settings → Pages → Source: *Deploy from a branch* → elegir la rama y la carpeta `/ (root)`.
 
-Si el micro no está disponible o no se da permiso, se puede tocar la llama para apagarla.
+Si el micro no está disponible o no se da permiso, hay que tocar la vela 5 veces para apagarla.
 
 ## Probar en local
 
